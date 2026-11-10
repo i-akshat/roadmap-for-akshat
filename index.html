@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Akshat's Roadmap</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Roadmap">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#0a0000;--surface:#110000;--card:#180000;--card2:#1c0000;
+  --border:#330000;--border-soft:#200000;
+  --red:#ff2d3d;--red-dim:#c81f2d;--red-glow:rgba(255,45,61,0.16);
+  --green:#3ddc84;--yellow:#ffc23d;--grey:#7a5555;
+  --text:#f3e8e8;--muted:#9c7070;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#000;}
+body{
+  background:radial-gradient(ellipse at top,#150000 0%,#0a0000 60%);
+  color:var(--text);font-family:'Sora',sans-serif;
+  min-height:100vh;padding-bottom:90px;
+  -webkit-tap-highlight-color:transparent;
+}
+.mono{font-family:'JetBrains Mono',monospace;}
+::selection{background:var(--red);color:#000;}
+
+/* HEADER */
+.header{text-align:center;padding:22px 16px 16px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(255,45,61,0.1),transparent);}
+.header .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+.header h1{font-size:clamp(18px,5vw,26px);font-weight:800;color:#fff;letter-spacing:-0.5px;line-height:1.15;}
+.header h1 span{color:var(--red);}
+.header p{color:var(--muted);font-size:11px;margin-top:4px;}
+
+/* NAV */
+.tabbar{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0d0000;border-top:1px solid var(--border);z-index:100;padding-bottom:env(safe-area-inset-bottom);}
+.tabbtn{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;padding:10px 2px 8px;background:none;border:none;color:var(--grey);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;cursor:pointer;border-top:2px solid transparent;transition:color .15s;}
+.tabbtn .ti{font-size:17px;}
+.tabbtn.active{color:var(--red);border-top-color:var(--red);}
+.tabpage{display:none;}
+.tabpage.active{display:block;animation:fadein .2s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* LAYOUT */
+.wrap{max-width:760px;margin:0 auto;padding:14px;}
+.card{background:var(--card);border:1px solid var(--border-soft);border-radius:14px;padding:16px;margin-bottom:12px;}
+.card-title{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--red);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;}
+.kbd{display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;color:var(--red);background:var(--surface);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 5px;letter-spacing:0.5px;margin-right:4px;}
+
+/* BUTTONS */
+.btn{background:var(--red);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:transform .1s,opacity .15s;}
+.btn:active{transform:scale(0.97);}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text);}
+.btn.full{width:100%;}
+.btn.danger{background:transparent;border:1px solid var(--red-dim);color:var(--red);}
+.btn.small{padding:7px 12px;font-size:11px;}
+
+/* INPUTS */
+input,textarea,select{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-family:'Sora',sans-serif;font-size:13px;margin-bottom:10px;accent-color:var(--red);}
+input:focus,textarea:focus,select:focus{outline:1px solid var(--red);border-color:var(--red);}
+textarea{resize:vertical;min-height:60px;}
+label.flabel{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;margin-top:2px;font-family:'JetBrains Mono',monospace;}
+
+/* PROGRESS BARS */
+.bar-outer{background:var(--surface);border-radius:8px;height:8px;overflow:hidden;border:1px solid var(--border-soft);}
+.bar-fill{background:linear-gradient(90deg,var(--red-dim),var(--red));height:100%;border-radius:8px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+/* DASHBOARD */
+.dash-hero{background:linear-gradient(135deg,rgba(255,45,61,0.14),rgba(255,45,61,0.02));border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:12px;text-align:center;}
+.dash-hero .today-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:20px;margin:10px 0 12px;}
+.hero-stat{text-align:center;}
+.hero-num{font-size:40px;font-weight:800;line-height:1;color:var(--red);font-family:'JetBrains Mono',monospace;text-shadow:0 0 20px var(--red-glow);}
+.hero-label{font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-top:4px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.hero-divider{width:1px;height:36px;background:var(--border);}
+.phase-now{font-size:18px;font-weight:800;color:#fff;margin:4px 0 2px;}
+.phase-sub{font-size:11px;color:var(--red);font-weight:600;}
+
+.status-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:30px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;border:1px solid var(--border);margin-bottom:8px;}
+.status-pill.ontrack{color:var(--green);border-color:var(--green);}
+.status-pill.behind{color:var(--red);border-color:var(--red);box-shadow:0 0 14px var(--red-glow);}
+.status-dot{width:7px;height:7px;border-radius:50%;background:currentColor;}
+.status-detail{font-size:12px;color:var(--muted);line-height:1.45;}
+
+.focus-phase{font-size:17px;font-weight:800;color:#fff;line-height:1.25;}
+.focus-months{font-size:10px;color:var(--muted);margin-top:3px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;}
+.focus-objective{background:var(--surface);border:1px solid var(--border-soft);border-left:3px solid var(--red);border-radius:0 10px 10px 0;padding:10px 12px;}
+.fo-label{font-size:9px;color:var(--red);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
+.fo-text{font-size:12px;color:var(--text);line-height:1.45;}
+
+.nm-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.nm-info .nm-label{font-size:14px;font-weight:700;color:#fff;}
+.nm-info .nm-date{font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.nm-countdown{text-align:center;flex-shrink:0;}
+.nm-num{font-size:26px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;line-height:1;}
+.nm-sub{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;font-family:'JetBrains Mono',monospace;}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.stat-grid.three{grid-template-columns:1fr 1fr 1fr;}
+.stat-box{background:var(--card);border:1px solid var(--border-soft);border-radius:12px;padding:12px 8px;text-align:center;}
+.stat-box .n{font-size:22px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;text-shadow:0 0 14px var(--red-glow);}
+.stat-box .l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
+
+.quote-box{background:var(--card);border-left:3px solid var(--red);border-radius:0 12px 12px 0;border-top:1px solid var(--border-soft);border-right:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);padding:12px 14px;font-size:13px;font-style:italic;color:#e8d0d0;margin-bottom:12px;}
+.quote-author{font-size:10px;color:var(--muted);margin-top:5px;font-style:normal;font-family:'JetBrains Mono',monospace;}
+
+/* SKILL TREE */
+.tree-overall{text-align:center;margin-bottom:10px;}
+.tree-overall-num{font-size:30px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;text-shadow:0 0 18px var(--red-glow);}
+.tree-overall-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.skill-tree{position:relative;padding-left:2px;margin-top:14px;}
+.skill-node{display:flex;align-items:center;gap:10px;padding:8px 0;position:relative;}
+.skill-node:not(:last-child)::after{content:'';position:absolute;left:15px;top:34px;bottom:-8px;width:1px;background:var(--border-soft);}
+.sn-marker{width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted);flex-shrink:0;z-index:1;font-family:'JetBrains Mono',monospace;}
+.skill-node.done .sn-marker{color:var(--green);border-color:var(--green);}
+.skill-node.current .sn-marker{color:var(--red);border-color:var(--red);box-shadow:0 0 10px var(--red-glow);}
+.sn-info{flex:1;min-width:0;}
+.sn-title{font-size:12px;font-weight:600;color:#fff;margin-bottom:4px;}
+.sn-bar-outer{background:var(--surface);border-radius:6px;height:5px;overflow:hidden;border:1px solid var(--border-soft);}
+.sn-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-dim),var(--red));width:0%;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.skill-node.done .sn-bar-fill{background:var(--green);}
+.sn-pct{font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0;font-weight:700;font-family:'JetBrains Mono',monospace;}
+
+/* BACKUP */
+.backup-row{display:flex;gap:8px;margin-bottom:12px;}
+
+/* GITHUB */
+.gh-stats{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-soft);}
+.gh-stat .n{font-size:18px;font-weight:700;color:var(--red);font-family:'JetBrains Mono',monospace;}
+.gh-stat .l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+
+/* RULES */
+.rules-list,.fail-list{list-style:none;}
+.rules-list li,.fail-list li{font-size:12px;padding:7px 0;border-bottom:1px solid var(--border-soft);line-height:1.45;}
+.rules-list li:last-child,.fail-list li:last-child{border-bottom:none;}
+.rules-list li::before{content:'›';color:var(--red);font-weight:700;margin-right:8px;}
+.fail-list li{color:#e0a0a0;}
+.fail-list li::before{content:'✕';color:var(--red);font-weight:700;margin-right:8px;}
+
+/* CALENDAR */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-nav button{background:var(--card);border:1px solid var(--border);color:var(--red);width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;}
+.cal-month-label{font-weight:700;font-size:15px;color:#fff;}
+.cal-phase-label{text-align:center;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:12px;}
+.cal-dow{text-align:center;font-size:9px;color:var(--muted);padding-bottom:4px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.cal-day{aspect-ratio:1;background:var(--surface);border:1px solid var(--border-soft);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;cursor:pointer;position:relative;color:var(--text);font-family:'JetBrains Mono',monospace;transition:border-color .15s;}
+.cal-day.empty{background:transparent;border:none;cursor:default;}
+.cal-day.today{border-color:var(--red);box-shadow:0 0 0 1px var(--red);}
+.cal-day.future{opacity:0.3;cursor:not-allowed;}
+.cal-day.milestone{border-color:var(--yellow);}
+.cal-day .dnum{font-weight:600;font-size:11px;line-height:1;}
+.cal-day .dot{width:5px;height:5px;border-radius:50%;margin-top:2px;}
+.dot-green{background:var(--green);}
+.dot-yellow{background:var(--yellow);}
+.dot-red{background:var(--red);}
+.dot-grey{background:#555;}
+.dot-milestone{background:var(--yellow);}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:10px;color:var(--muted);}
+.legend span{display:inline-flex;align-items:center;gap:4px;}
+.legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
+.month-report{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;}
+.month-report .mr{text-align:center;background:var(--surface);border-radius:8px;padding:8px 4px;border:1px solid var(--border-soft);}
+.month-report .mr .n{font-weight:700;font-size:16px;font-family:'JetBrains Mono',monospace;}
+.month-report .mr .l{font-size:9px;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:flex-end;justify-content:center;z-index:200;padding:0;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--card2);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:20px 16px 32px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;}
+.modal h3{font-size:15px;margin-bottom:3px;color:#fff;font-weight:700;}
+.modal .modal-sub{font-size:11px;color:var(--muted);margin-bottom:14px;}
+.status-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.status-opt{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:11px 12px;cursor:pointer;font-size:12px;transition:border-color .15s;}
+.status-opt.selected{border-color:var(--red);background:rgba(255,45,61,0.08);}
+.status-opt .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.modal-actions{display:flex;gap:8px;margin-top:10px;}
+.modal-actions .btn{flex:1;}
+
+/* PHASES */
+.phase-card{background:var(--card);border:1px solid var(--border-soft);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.phase-head{display:flex;align-items:center;gap:10px;padding:13px;cursor:pointer;}
+.phase-num{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--surface);border:1px solid var(--border);}
+.phase-head-info{flex:1;min-width:0;}
+.phase-head-info .pt{font-weight:700;font-size:13px;color:#fff;}
+.phase-head-info .pm{font-size:10px;color:var(--muted);}
+.phase-pct-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:48px;flex-shrink:0;}
+.phase-pct-wrap .pp{font-size:11px;font-weight:700;color:var(--red);font-family:'JetBrains Mono',monospace;}
+.mini-bar{width:100%;height:4px;background:var(--surface);border-radius:4px;overflow:hidden;}
+.mini-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .4s;}
+.chev{color:var(--grey);font-size:11px;transition:transform .2s;flex-shrink:0;}
+.phase-card.open .chev{transform:rotate(180deg);}
+.phase-body{display:none;padding:0 13px 14px;}
+.phase-card.open .phase-body{display:block;}
+.phase-sec-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin:10px 0 5px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.check-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.check-item:last-child{border-bottom:none;}
+.check-item input{width:auto;margin:2px 0 0;flex-shrink:0;accent-color:var(--red);}
+.check-item label{flex:1;line-height:1.4;cursor:pointer;}
+.check-item input:checked+label{color:var(--muted);text-decoration:line-through;}
+
+/* DSA */
+.dsa-box{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:12px;margin-top:10px;}
+.dsa-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border-soft);}
+.dsa-row:last-of-type{border-bottom:none;}
+.dsa-counter{display:flex;align-items:center;gap:8px;}
+.dsa-counter button{width:24px;height:24px;border-radius:6px;background:var(--card);border:1px solid var(--border);color:var(--red);font-size:14px;cursor:pointer;}
+.dsa-counter .cnum{font-family:'JetBrains Mono',monospace;font-weight:700;min-width:22px;text-align:center;font-size:14px;}
+.dsa-target{font-size:10px;color:var(--muted);text-align:right;margin-top:8px;font-family:'JetBrains Mono',monospace;}
+
+/* PROJECTS */
+.proj-card{background:var(--card);border:1px solid var(--border-soft);border-radius:12px;padding:14px;margin-bottom:10px;}
+.proj-card .ptitle{font-weight:700;font-size:14px;color:#fff;margin-bottom:3px;}
+.proj-card .pdesc{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+.proj-card .ptech{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.ptag{background:rgba(255,45,61,0.12);color:var(--red);font-size:9px;padding:2px 7px;border-radius:5px;font-family:'JetBrains Mono',monospace;}
+.proj-links{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+.proj-links a{font-size:11px;color:var(--text);text-decoration:none;border:1px solid var(--border);padding:4px 9px;border-radius:6px;}
+.proj-date{font-size:9px;color:var(--grey);margin-top:7px;font-family:'JetBrains Mono',monospace;}
+.proj-del{float:right;background:none;border:none;color:var(--grey);font-size:15px;cursor:pointer;}
+.empty-state{text-align:center;padding:28px 16px;color:var(--muted);font-size:12px;}
+.empty-state .em{font-size:30px;display:block;margin-bottom:8px;}
+
+/* GOALS */
+.section-toggle{display:flex;gap:7px;margin-bottom:12px;}
+.section-toggle button{flex:1;background:var(--card);border:1px solid var(--border-soft);color:var(--muted);padding:9px;border-radius:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:all .15s;}
+.section-toggle button.active{background:var(--red);color:#fff;border-color:var(--red);}
+.goal-week-card{background:var(--card);border:1px solid var(--border-soft);border-radius:12px;padding:13px;margin-bottom:9px;}
+.gw-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;}
+.gw-head .gwt{font-weight:700;font-size:12px;color:#fff;}
+.gw-head .gwd{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.goal-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.goal-item:last-child{border-bottom:none;}
+.goal-item input{width:auto;margin-top:2px;accent-color:var(--red);}
+.goal-item label{flex:1;line-height:1.4;cursor:pointer;}
+.goal-item label.done{text-decoration:line-through;color:var(--grey);}
+.goal-add-row{display:flex;gap:8px;margin-bottom:10px;}
+.goal-add-row input{margin-bottom:0;flex:1;}
+.goal-add-row button{padding:10px 14px;font-size:18px;flex-shrink:0;}
+.reflect-card{background:var(--card);border:1px solid var(--border-soft);border-radius:12px;padding:13px;margin-bottom:9px;}
+.reflect-card .rmonth{font-weight:700;color:#fff;font-size:12px;margin-bottom:7px;font-family:'JetBrains Mono',monospace;}
+.reflect-q{font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-top:7px;margin-bottom:3px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.reflect-a{font-size:12px;color:var(--text);line-height:1.4;}
+
+/* MILESTONE LIST */
+.milestone-row{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-soft);font-size:12px;}
+.milestone-row:last-child{border-bottom:none;}
+.milestone-row .mdate{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;margin-left:auto;}
+.milestone-row.passed{opacity:0.35;}
+.milestone-row.next-up .mname{color:var(--red);font-weight:700;}
+
+/* TOAST */
+.toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%) translateY(8px);background:#1a0000;border:1px solid var(--red);color:#fff;padding:9px 18px;border-radius:30px;font-size:12px;z-index:300;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag mono">ZERO SKILLS → JOB READY</div>
+  <h1>AKSHAT'S <span>ROADMAP</span></h1>
+  <p>CSE • June 2026 → May 2027 • Full Stack → AI/ML</p>
+</div>
+
+<div class="wrap">
+
+<!-- ===== DASHBOARD ===== -->
+<div class="tabpage active" id="page-dashboard">
+
+  <div class="dash-hero">
+    <div class="today-date mono" id="dash-date"></div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-num mono" id="dash-daynum">1</div>
+        <div class="hero-label mono">Day <span id="dash-daytotal">/ 365</span></div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-num mono" id="dash-daysleft">364</div>
+        <div class="hero-label mono">Days Left</div>
+      </div>
+    </div>
+    <div class="phase-now" id="dash-phase"></div>
+    <div class="phase-sub" id="dash-phase-sub"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">SYS</span>System Status</div>
+    <div class="status-pill" id="status-pill"><span class="status-dot"></span><span id="status-label">ON TRACK</span></div>
+    <div class="status-detail" id="status-detail">Checking...</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">NOW</span>Current Focus</div>
+    <div class="focus-phase" id="focus-phase"></div>
+    <div class="focus-months mono" id="focus-months"></div>
+    <div class="focus-objective">
+      <div class="fo-label">Next Objective</div>
+      <div class="fo-text" id="focus-objective-text"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">NEXT</span>Next Milestone</div>
+    <div class="nm-row">
+      <div class="nm-info">
+        <div class="nm-label" id="nm-label">—</div>
+        <div class="nm-date mono" id="nm-date">—</div>
+      </div>
+      <div class="nm-countdown">
+        <div class="nm-num mono" id="nm-days">—</div>
+        <div class="nm-sub">days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">GIT</span>GitHub Activity</div>
+    <div style="font-size:10px;color:var(--muted);margin-bottom:8px;font-family:'JetBrains Mono',monospace;" id="github-week-label"></div>
+    <div class="check-item" style="padding:4px 0;">
+      <input type="checkbox" id="github-push-check" onchange="toggleGithubPush()">
+      <label for="github-push-check" style="font-size:13px;font-weight:600;">I pushed to GitHub this week ✓</label>
+    </div>
+    <div class="gh-stats">
+      <div class="gh-stat"><div class="n" id="gh-streak">0</div><div class="l">Week Streak</div></div>
+      <div class="gh-stat"><div class="n" id="gh-total">0</div><div class="l">Total Active Weeks</div></div>
+    </div>
+  </div>
+
+  <div class="quote-box" id="dash-quote"></div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">TREE</span>Skill Progress Tree</div>
+    <div class="tree-overall">
+      <div class="tree-overall-num mono" id="overall-pct">0%</div>
+      <div class="tree-overall-sub" id="overall-count">0/0 tasks complete</div>
+    </div>
+    <div class="bar-outer"><div class="bar-fill" id="overall-bar" style="width:0%"></div></div>
+    <div class="skill-tree" id="skill-tree"></div>
+  </div>
+
+  <div class="stat-grid three">
+    <div class="stat-box"><div class="n" id="stat-streak">0</div><div class="l">🔥 Day Streak</div></div>
+    <div class="stat-box"><div class="n" id="stat-best">0</div><div class="l">Best Streak</div></div>
+    <div class="stat-box"><div class="n" id="stat-projects">0</div><div class="l">Projects</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">OPS</span>Rules That Decide Success</div>
+    <ul class="rules-list">
+      <li>No more than 1 main language — JavaScript</li>
+      <li>Every month = at least 1 project output</li>
+      <li>No tutorial-only learning — everything ends in a project</li>
+      <li>GitHub must be active every week</li>
+      <li>No zero days — even 30 min counts</li>
+      <li>Every topic ends in a project</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">RISK</span>Failure Points — Avoid These</div>
+    <ul class="fail-list">
+      <li>Switching to Python / AI / other tech randomly</li>
+      <li>Watching tutorials without building</li>
+      <li>Not deploying projects</li>
+      <li>Delaying portfolio</li>
+      <li>Waiting to feel "ready"</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="kbd">DATA</span>Backup & Restore</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5;">Export your data to transfer to another device or browser. Import to restore.</div>
+    <div class="backup-row">
+      <button class="btn small" onclick="openExportModal()">⬆ Export Backup</button>
+      <button class="btn small ghost" onclick="openImportModal()">⬇ Import Backup</button>
+    </div>
+    <button class="btn danger small full" onclick="confirmReset()">Reset All Data</button>
+  </div>
+
+</div>
+
+<!-- ===== CALENDAR ===== -->
+<div class="tabpage" id="page-calendar">
+  <div class="cal-nav">
+    <button onclick="calPrev()">‹</button>
+    <span class="cal-month-label mono" id="cal-title"></span>
+    <button onclick="calNext()">›</button>
+  </div>
+  <div class="cal-phase-label" id="cal-phase-label"></div>
+  <div class="legend">
+    <span><span class="dot dot-green"></span>Productive</span>
+    <span><span class="dot dot-yellow"></span>Partial</span>
+    <span><span class="dot dot-red"></span>Rest</span>
+    <span><span class="dot dot-grey"></span>Missed</span>
+    <span><span class="dot dot-milestone"></span>Milestone</span>
+  </div>
+  <div class="cal-grid" id="cal-dow-row">
+    <div class="cal-dow">Su</div><div class="cal-dow">Mo</div><div class="cal-dow">Tu</div>
+    <div class="cal-dow">We</div><div class="cal-dow">Th</div><div class="cal-dow">Fr</div><div class="cal-dow">Sa</div>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="month-report">
+    <div class="mr"><div class="n" id="rep-green" style="color:var(--green)">0</div><div class="l">Green</div></div>
+    <div class="mr"><div class="n" id="rep-yellow" style="color:var(--yellow)">0</div><div class="l">Partial</div></div>
+    <div class="mr"><div class="n" id="rep-red" style="color:var(--red)">0</div><div class="l">Rest</div></div>
+    <div class="mr"><div class="n" id="rep-grey" style="color:#888">0</div><div class="l">Missed</div></div>
+  </div>
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title"><span class="kbd">PIN</span>Milestones</div>
+    <div id="milestone-list-cal"></div>
+    <div style="margin-top:10px;">
+      <label class="flabel">💻 Set Laptop Purchase Date</label>
+      <input type="date" id="laptop-date-input" onchange="saveLaptopDate(this.value)" style="margin-bottom:0;">
+    </div>
+  </div>
+</div>
+
+<!-- ===== PHASES ===== -->
+<div class="tabpage" id="page-phases">
+  <div class="card" style="margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px;">Total Progress</span>
+      <span style="font-size:18px;font-weight:800;color:var(--red);font-family:'JetBrains Mono',monospace;" id="phases-overall-pct">0%</span>
+    </div>
+    <div class="bar-outer"><div class="bar-fill" id="phases-overall-bar" style="width:0%"></div></div>
+  </div>
+  <div id="phases-container"></div>
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title"><span class="kbd">DSA</span>DSA Tracker — Keep It Simple</div>
+    <div class="dsa-box" id="dsa-box"></div>
+  </div>
+</div>
+
+<!-- ===== PROJECTS ===== -->
+<div class="tabpage" id="page-projects">
+  <div class="card">
+    <div class="card-title"><span class="kbd">NEW</span>Add Project</div>
+    <label class="flabel">Project Name *</label>
+    <input type="text" id="proj-name" placeholder="e.g. Weather Dashboard">
+    <label class="flabel">Description</label>
+    <textarea id="proj-desc" placeholder="What does it do? (1-2 lines)"></textarea>
+    <label class="flabel">Tech Stack (comma separated)</label>
+    <input type="text" id="proj-tech" placeholder="HTML, CSS, JavaScript">
+    <label class="flabel">GitHub Link</label>
+    <input type="text" id="proj-github" placeholder="https://github.com/...">
+    <label class="flabel">Live Link</label>
+    <input type="text" id="proj-live" placeholder="https://...">
+    <label class="flabel">Phase</label>
+    <input type="text" id="proj-phase" placeholder="e.g. Phase 1">
+    <label class="flabel">Completion Date</label>
+    <input type="date" id="proj-date">
+    <button class="btn full" onclick="addProject()">Add Project</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="kbd">ALL</span>My Projects (<span id="proj-total">0</span>)</div>
+    <div id="projects-list"></div>
+  </div>
+</div>
+
+<!-- ===== GOALS ===== -->
+<div class="tabpage" id="page-goals">
+  <div class="section-toggle">
+    <button class="active" id="goal-tab-weekly" onclick="switchGoalSection('weekly')">📅 Weekly Goals</button>
+    <button id="goal-tab-monthly" onclick="switchGoalSection('monthly')">🪞 Monthly Reflection</button>
+    <button id="goal-tab-rules" onclick="switchGoalSection('rules')">⚡ Rules</button>
+  </div>
+
+  <div id="goals-weekly-section">
+    <div class="card">
+      <div class="card-title"><span class="kbd">WEEK</span>This Week's Goals</div>
+      <div class="goal-add-row">
+        <input type="text" id="new-goal-input" placeholder="Add a goal..." onkeypress="if(event.key==='Enter')addWeeklyGoal()">
+        <button class="btn" onclick="addWeeklyGoal()">+</button>
+      </div>
+      <div id="weekly-goals-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="kbd">HIST</span>Past Weeks</div>
+      <div id="past-weeks-list"></div>
+    </div>
+  </div>
+
+  <div id="goals-monthly-section" style="display:none;">
+    <div class="card">
+      <div class="card-title"><span class="kbd">REF</span>Monthly Reflection</div>
+      <label class="flabel">Month</label>
+      <select id="reflect-month"></select>
+      <label class="flabel">What did I learn this month?</label>
+      <textarea id="reflect-q1" placeholder="Topics learned, skills gained..."></textarea>
+      <label class="flabel">What went wrong?</label>
+      <textarea id="reflect-q2" placeholder="Mistakes, missed days, distractions..."></textarea>
+      <label class="flabel">My goal for next month?</label>
+      <textarea id="reflect-q3" placeholder="What will I focus on next month..."></textarea>
+      <button class="btn full" onclick="saveReflection()">Save Reflection</button>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="kbd">PAST</span>Past Reflections</div>
+      <div id="reflections-list"></div>
+    </div>
+  </div>
+
+  <div id="goals-rules-section" style="display:none;">
+    <div class="card">
+      <div class="card-title"><span class="kbd">OPS</span>Roadmap Rules</div>
+      <ul class="rules-list">
+        <li>No more than 1 main language — JavaScript</li>
+        <li>Every month = at least 1 project output</li>
+        <li>No tutorial-only learning — everything ends in a project</li>
+        <li>GitHub must be active every week</li>
+        <li>No zero days — even 30 minutes counts</li>
+        <li>Weekly GitHub push minimum</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="kbd">RISK</span>Failure Points</div>
+      <ul class="fail-list">
+        <li>Switching to Python / AI / other tech randomly</li>
+        <li>Watching tutorials without building</li>
+        <li>Not deploying projects</li>
+        <li>Delaying portfolio</li>
+        <li>Waiting to feel "ready"</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="kbd">💡</span>Reality Note</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:700;">
+        <div>🏆 Skills &gt; Certificates</div>
+        <div>💻 Projects &gt; Theory</div>
+        <div>📈 Consistency &gt; Motivation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .wrap -->
+
+<!-- BOTTOM NAV -->
+<div class="tabbar">
+  <button class="tabbtn active" data-page="dashboard" onclick="switchPage('dashboard')"><span class="ti">🏠</span>Home</button>
+  <button class="tabbtn" data-page="calendar" onclick="switchPage('calendar')"><span class="ti">📅</span>Calendar</button>
+  <button class="tabbtn" data-page="phases" onclick="switchPage('phases')"><span class="ti">🗺</span>Phases</button>
+  <button class="tabbtn" data-page="projects" onclick="switchPage('projects')"><span class="ti">📁</span>Projects</button>
+  <button class="tabbtn" data-page="goals" onclick="switchPage('goals')"><span class="ti">🎯</span>Goals</button>
+</div>
+
+<!-- DAY MODAL -->
+<div class="modal-overlay" id="day-modal" onclick="if(event.target===this)closeDayModal()">
+  <div class="modal">
+    <h3 id="day-modal-title">—</h3>
+    <div class="modal-sub">How did this day go?</div>
+    <div class="status-opts">
+      <div class="status-opt" data-status="green" onclick="selectDayStatus('green')"><span class="dot dot-green"></span>🟢 Productive — coded + pushed to GitHub</div>
+      <div class="status-opt" data-status="yellow" onclick="selectDayStatus('yellow')"><span class="dot dot-yellow"></span>🟡 Partial — coded but didn't push</div>
+      <div class="status-opt" data-status="red" onclick="selectDayStatus('red')"><span class="dot dot-red"></span>🔴 Rest day — took a planned break</div>
+      <div class="status-opt" data-status="grey" onclick="selectDayStatus('grey')"><span class="dot dot-grey"></span>⚫ Missed — did nothing (be honest)</div>
+    </div>
+    <label class="flabel">Note (optional)</label>
+    <textarea id="day-note" placeholder="What did you work on today?"></textarea>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeDayModal()">Cancel</button>
+      <button class="btn danger small" onclick="clearDayStatus()">Clear</button>
+      <button class="btn" onclick="saveDayStatus()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="export-modal" onclick="if(event.target===this)closeExportModal()">
+  <div class="modal">
+    <h3>⬆ Export Backup</h3>
+    <div class="modal-sub" id="export-modal-sub">Copy this code and save it in your Notes or WhatsApp to yourself. Paste it back using Import on any device.</div>
+    <textarea id="export-text" readonly style="min-height:100px;font-family:'JetBrains Mono',monospace;font-size:10px;"></textarea>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeExportModal()">Close</button>
+      <button class="btn" onclick="copyExportText()">Copy Code</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div class="modal-overlay" id="import-modal" onclick="if(event.target===this)closeImportModal()">
+  <div class="modal">
+    <h3>⬇ Import Backup</h3>
+    <div class="modal-sub">Paste the backup code you exported. This replaces all data on this device.</div>
+    <textarea id="import-text" placeholder="Paste your backup code here..." style="min-height:100px;font-family:'JetBrains Mono',monospace;font-size:10px;"></textarea>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeImportModal()">Cancel</button>
+      <button class="btn" onclick="importData()">Import & Restore</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================ STATE ============================================================ */
+const STORE_KEY = 'akshat_roadmap_v2';
+
+function defaultState(){
+  return {
+    version:2,
+    checklist:{},
+    dsaCount:{arrays:0,strings:0,recursion:0,sorting:0,searching:0},
+    calendar:{},
+    laptopDate:null,
+    projects:[],
+    goalWeeks:[],
+    reflections:{},
+    githubPushWeeks:{},
+    streak:0,
+    bestStreak:0
+  };
+}
+
+function loadState(){
+  try{
+    let raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return defaultState();
+    let parsed = JSON.parse(raw);
+    return Object.assign(defaultState(), parsed);
+  }catch(e){ return defaultState(); }
+}
+
+let STATE = loadState();
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(STATE)); }
+
+/* EXPORT / IMPORT */
+function openExportModal(){
+  let json = JSON.stringify(STATE);
+  let encoded = 'AKSHATROADMAP2::' + btoa(unescape(encodeURIComponent(json)));
+  document.getElementById('export-text').value = encoded;
+  document.getElementById('export-modal').classList.add('show');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(encoded).then(()=>{
+      document.getElementById('export-modal-sub').textContent = 'Auto-copied to clipboard! Also save it manually below just in case.';
+    }).catch(()=>{});
+  }
+}
+function closeExportModal(){ document.getElementById('export-modal').classList.remove('show'); }
+function copyExportText(){
+  let box = document.getElementById('export-text');
+  box.select(); box.setSelectionRange(0,99999);
+  try{ document.execCommand('copy'); }catch(e){}
+  if(navigator.clipboard) navigator.clipboard.writeText(box.value).then(()=>toast('Copied ✓')).catch(()=>toast('Select text and copy manually'));
+  else toast('Select text and copy manually');
+}
+function openImportModal(){ document.getElementById('import-text').value=''; document.getElementById('import-modal').classList.add('show'); }
+function closeImportModal(){ document.getElementById('import-modal').classList.remove('show'); }
+function importData(){
+  let raw = document.getElementById('import-text').value.trim();
+  if(!raw){ toast('Paste your backup code first'); return; }
+  if(!raw.startsWith('AKSHATROADMAP2::')){ toast('Invalid backup code'); return; }
+  try{
+    let json = decodeURIComponent(escape(atob(raw.replace('AKSHATROADMAP2::',''))));
+    STATE = Object.assign(defaultState(), JSON.parse(json));
+    save(); closeImportModal();
+    renderAll(); toast('Backup restored ✓');
+  }catch(e){ toast('Could not read backup — copy it fully'); }
+}
+function confirmReset(){
+  if(confirm('Reset ALL data? This cannot be undone.')){
+    STATE = defaultState(); save(); renderAll(); toast('Data reset');
+  }
+}
+
+/* ============================================================ CONSTANTS ============================================================ */
+const ROADMAP_START = '2026-06-01';
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DSA_TOPICS = ['arrays','strings','recursion','sorting','searching'];
+
+const QUOTES = [
+  {q:"The secret of getting ahead is getting started.",a:"Mark Twain"},
+  {q:"It always seems impossible until it's done.",a:"Nelson Mandela"},
+  {q:"A real project with bugs beats a tutorial clone with none.",a:"Dev Wisdom"},
+  {q:"AI/ML is the destination. Full stack fundamentals are the only road there.",a:"Your Plan"},
+  {q:"Push small, push often. A quiet repo is a dead roadmap.",a:"Dev Wisdom"},
+  {q:"Discipline is choosing the calendar over the mood.",a:"Unknown"},
+  {q:"Nobody hires 'almost finished'. Finish it.",a:"Dev Wisdom"},
+  {q:"Every checkbox you tick is proof you didn't wait to feel ready.",a:"Your Tracker"},
+  {q:"You're not behind. You're on Day N of 365. Keep going.",a:"Your Roadmap"},
+  {q:"The expert in anything was once a beginner.",a:"Helen Hayes"},
+  {q:"Consistency is what transforms average into excellence.",a:"Unknown"},
+  {q:"Build in public. Even an empty README is a start.",a:"Dev Wisdom"},
+];
+
+const PHASE_DEFS = [
+  {id:'p1',icon:'🌱',title:'Phase 1',sub:'HTML · CSS · JS Basics',months:'Jun – Jul 2026',
+   learn:['HTML — structure, tags, semantic elements','CSS — layout, flexbox, grid, box model','JavaScript basics — variables, loops, functions','Arrays, objects, DOM manipulation'],
+   build:['Portfolio website (simple)','To-do app (basic)','Calculator or notes app'],
+   output:['3 small projects completed','GitHub created and active weekly']},
+  {id:'p2',icon:'🌐',title:'Phase 2',sub:'Advanced JS · APIs',months:'Aug – Sep 2026',
+   learn:['Advanced JS — closures, promises, ES6+','Async/Await and Fetch API','Error handling','Working with external APIs'],
+   build:['Weather app (API-based)','Movie search app (API-based)','Expense tracker'],
+   output:['3 medium projects completed','1 project deployed with live link']},
+  {id:'p3',icon:'⚛️',title:'Phase 3',sub:'React · Modern Frontend',months:'Oct – Nov 2026',
+   learn:['React basics and components','Props and State','Hooks — useState, useEffect','React Router'],
+   build:['React portfolio upgrade','Dashboard app','Task manager (React version)'],
+   output:['2-3 React apps completed','Understand component thinking']},
+  {id:'p4',icon:'🧱',title:'Phase 4',sub:'Node.js · MongoDB · Full Stack',months:'Dec 2026 – Jan 2027',
+   learn:['Node.js basics','Express.js and REST APIs','MongoDB basics','Authentication basics (JWT)'],
+   build:['Full Stack #1 — Blog app / Student mgmt / Notes app with login (choose one)'],
+   output:['1 strong full-stack project','Understand frontend + backend connection']},
+  {id:'p5',icon:'🛒',title:'Phase 5',sub:'Portfolio · Job Readiness',months:'Feb – Mar 2027',
+   learn:['UI design improvement on all projects','Add authentication','Add database properly','Deploy everything with live links'],
+   build:['Full Stack #2 — E-commerce / Job tracker / Social clone (choose one)'],
+   output:['2 strong full-stack projects deployed','Internship-level portfolio ready']},
+  {id:'p6',icon:'🚀',title:'Phase 6',sub:'Internship Hunting Mode',months:'Apr – May 2027',
+   learn:['Resume (1 page only)','Portfolio website final polish','GitHub cleanup','Interview prep — basic DSA'],
+   build:['Apply on LinkedIn, Internshala, Wellfound, Startups — 10-20 apps daily'],
+   output:['First internship / job offer received 🎉']},
+];
+
+// Build PHASES with stable date ranges
+const PHASE_MONTHS = [2,2,2,2,2,2];
+let PHASES = [];
+let cursor = parseDate(ROADMAP_START);
+PHASE_DEFS.forEach((def,i)=>{
+  let start = fmtDate(cursor);
+  let end = fmtDate(lastDayOfMonth(addMonths(cursor, PHASE_MONTHS[i]-1)));
+  PHASES.push(Object.assign({}, def, {start, end}));
+  cursor = addMonths(cursor, PHASE_MONTHS[i]);
+});
+
+const MILESTONES_BASE = [
+  {date:'2026-09-01',icon:'🎓',label:'3rd Semester Starts'},
+  {date:'2027-01-01',icon:'🎓',label:'4th Semester Starts'},
+  {date:'2027-05-31',icon:'🏁',label:'End of 2nd Year — Internship Ready!'},
+];
+
+function getMilestones(){
+  let ms = [...MILESTONES_BASE];
+  if(STATE.laptopDate) ms.unshift({date:STATE.laptopDate,icon:'💻',label:'Get Laptop'});
+  return ms.sort((a,b)=>a.date.localeCompare(b.date));
+}
+
+/* ============================================================ DATE HELPERS ============================================================ */
+function fmtDate(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function todayKey(){ return fmtDate(new Date()); }
+function parseDate(k){ let [y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d||1); }
+function addMonths(date,n){ let d=new Date(date); d.setMonth(d.getMonth()+n); d.setDate(1); return d; }
+function lastDayOfMonth(dt){ return new Date(dt.getFullYear(),dt.getMonth()+1,0); }
+function getISOWeekKey(date){
+  let d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  let day=d.getUTCDay()||7; d.setUTCDate(d.getUTCDate()+1-day);
+  let ys=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return d.getUTCFullYear()+'-W'+String(Math.ceil((((d-ys)/86400000)+1)/7)).padStart(2,'0');
+}
+function getWeekRangeLabel(date){
+  let d=new Date(date),day=d.getDay()||7;
+  let mon=new Date(d); mon.setDate(d.getDate()-day+1);
+  let sun=new Date(mon); sun.setDate(mon.getDate()+6);
+  return mon.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' – '+sun.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+/* ============================================================ PHASE HELPERS ============================================================ */
+function ckKey(phaseId,items,idx){ return phaseId+'_'+idx; }
+function getCurrentPhase(){
+  let now=todayKey();
+  for(let p of PHASES){ if(now>=p.start&&now<=p.end) return p; }
+  return now<PHASES[0].start ? PHASES[0] : PHASES[PHASES.length-1];
+}
+function getPhaseItems(p){ return [...p.learn,...p.build,...p.output]; }
+function getPhaseCompletion(p){
+  let items=getPhaseItems(p);
+  let done=items.filter((_,i)=>STATE.checklist[ckKey(p.id,items,i)]).length;
+  return {done,total:items.length,pct:items.length?Math.round(done/items.length*100):0};
+}
+function countAllTasks(){
+  let total=0,done=0;
+  PHASES.forEach(p=>{ let c=getPhaseCompletion(p); total+=c.total; done+=c.done; });
+  return {total,done};
+}
+
+/* ============================================================ STREAK ============================================================ */
+function computeStreaks(){
+  let cal=STATE.calendar, all=Object.keys(cal).sort();
+  if(!all.length) return {current:0,best:0};
+  let best=0,run=0,prev=null;
+  all.forEach(k=>{
+    let st=cal[k].status;
+    let cons=prev&&(parseDate(k)-parseDate(prev))/86400000===1;
+    if(st==='grey'){ run=0; }
+    else if(cons){ run++; }
+    else{ run=1; }
+    if(run>best) best=run;
+    prev=k;
+  });
+  let today=todayKey();
+  let todaySt=cal[today]?.status;
+  let yday=fmtDate(new Date(parseDate(today).getTime()-86400000));
+  let ydaySt=cal[yday]?.status;
+  let cur=0;
+  if(todaySt&&todaySt!=='grey'){ cur=1; let d=new Date(parseDate(today)); d.setDate(d.getDate()-1); while(true){ let k=fmtDate(d); let s=cal[k]?.status; if(!s||s==='grey') break; cur++; d.setDate(d.getDate()-1); } }
+  else if(ydaySt&&ydaySt!=='grey'){ cur=1; let d=new Date(parseDate(yday)); d.setDate(d.getDate()-1); while(true){ let k=fmtDate(d); let s=cal[k]?.status; if(!s||s==='grey') break; cur++; d.setDate(d.getDate()-1); } }
+  STATE.streak=cur; STATE.bestStreak=Math.max(best,STATE.bestStreak||0,cur);
+  save();
+  return {current:cur,best:STATE.bestStreak};
+}
+
+/* ============================================================ NAVIGATION ============================================================ */
+function switchPage(name){
+  document.querySelectorAll('.tabpage').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  if(name==='calendar') renderCalendar();
+  if(name==='phases') renderPhases();
+  if(name==='projects') renderProjects();
+  if(name==='goals') renderGoals();
+  if(name==='dashboard') renderDashboard();
+  window.scrollTo(0,0);
+}
+
+function renderAll(){
+  renderDashboard();
+  renderPhases();
+  renderProjects();
+  renderGoals();
+}
+
+/* ============================================================ DASHBOARD ============================================================ */
+function renderDashboard(){
+  // Date
+  let now=new Date();
+  let days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  document.getElementById('dash-date').textContent=days[now.getDay()]+', '+MONTH_NAMES[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
+
+  // Day counters
+  let start=parseDate(ROADMAP_START); start.setHours(0,0,0,0); now.setHours(0,0,0,0);
+  let end=parseDate(PHASES[PHASES.length-1].end); end.setHours(0,0,0,0);
+  let totalDays=Math.round((end-start)/86400000)+1;
+  let dayNum=Math.max(1,Math.floor((now-start)/86400000)+1);
+  let daysLeft=Math.max(0,totalDays-dayNum);
+  document.getElementById('dash-daynum').textContent=dayNum;
+  document.getElementById('dash-daysleft').textContent=daysLeft;
+
+  // Current phase
+  let cp=getCurrentPhase();
+  document.getElementById('dash-phase').textContent=cp.icon+' '+cp.title+' — '+cp.sub;
+  document.getElementById('dash-phase-sub').textContent=cp.months;
+
+  // System status
+  let nowKey=todayKey();
+  let behind=PHASES.filter(p=>nowKey>p.end&&getPhaseCompletion(p).pct<100);
+  let pill=document.getElementById('status-pill');
+  if(!behind.length){
+    pill.className='status-pill ontrack';
+    document.getElementById('status-label').textContent='ON TRACK';
+    document.getElementById('status-detail').textContent='All completed phase windows are fully checked off. Keep shipping.';
+  } else {
+    pill.className='status-pill behind';
+    document.getElementById('status-label').textContent='BEHIND';
+    let w=behind[0]; let c=getPhaseCompletion(w);
+    document.getElementById('status-detail').textContent=w.title+' ended — only '+c.pct+'% done ('+c.done+'/'+c.total+' tasks). Open Phases and close the gap.';
+  }
+
+  // Focus card
+  document.getElementById('focus-phase').textContent=cp.icon+' '+cp.title;
+  document.getElementById('focus-months').textContent=cp.months;
+  let items=getPhaseItems(cp);
+  let nextItem=items.find((_,i)=>!STATE.checklist[ckKey(cp.id,items,i)]);
+  document.getElementById('focus-objective-text').textContent=nextItem||'Phase complete — move to the next one!';
+
+  // Next milestone
+  let ms=getMilestones().filter(m=>m.date>=nowKey);
+  if(ms.length){
+    let m=ms[0];
+    document.getElementById('nm-label').textContent=m.icon+' '+m.label;
+    document.getElementById('nm-date').textContent=parseDate(m.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    document.getElementById('nm-days').textContent=Math.round((parseDate(m.date)-parseDate(nowKey))/86400000);
+  } else {
+    document.getElementById('nm-label').textContent='All milestones passed 🎉';
+    document.getElementById('nm-date').textContent='';
+    document.getElementById('nm-days').textContent='—';
+  }
+
+  // GitHub
+  let wk=getISOWeekKey(new Date());
+  document.getElementById('github-week-label').textContent='Week of '+getWeekRangeLabel(new Date());
+  document.getElementById('github-push-check').checked=!!STATE.githubPushWeeks[wk];
+  let ghWeeks=Object.keys(STATE.githubPushWeeks).filter(k=>STATE.githubPushWeeks[k]).length;
+  let ghStreak=0; let wkCursor=new Date();
+  while(true){ let wkk=getISOWeekKey(wkCursor); if(!STATE.githubPushWeeks[wkk]) break; ghStreak++; wkCursor.setDate(wkCursor.getDate()-7); }
+  document.getElementById('gh-streak').textContent=ghStreak;
+  document.getElementById('gh-total').textContent=ghWeeks;
+
+  // Quote
+  let qi=dayNum%QUOTES.length;
+  let q=QUOTES[qi];
+  document.getElementById('dash-quote').innerHTML='"'+q.q+'"<div class="quote-author">— '+q.a+'</div>';
+
+  // Skill tree
+  let {total,done}=countAllTasks();
+  let pct=total?Math.round(done/total*100):0;
+  document.getElementById('overall-pct').textContent=pct+'%';
+  document.getElementById('overall-count').textContent=done+'/'+total+' tasks complete';
+  document.getElementById('overall-bar').style.width=pct+'%';
+  document.getElementById('phases-overall-pct').textContent=pct+'%';
+  document.getElementById('phases-overall-bar').style.width=pct+'%';
+
+  let treeHtml='';
+  PHASES.forEach((p,i)=>{
+    let c=getPhaseCompletion(p);
+    let st=c.pct===100?'done':(p.id===cp.id?'current':'');
+    treeHtml+='<div class="skill-node '+st+'"><div class="sn-marker">P'+(i+1)+'</div><div class="sn-info"><div class="sn-title">'+p.icon+' '+p.title+' — '+p.sub+'</div><div class="sn-bar-outer"><div class="sn-bar-fill" data-w="'+c.pct+'"></div></div></div><div class="sn-pct">'+c.pct+'%</div></div>';
+  });
+  document.getElementById('skill-tree').innerHTML=treeHtml;
+  setTimeout(()=>{ document.querySelectorAll('.sn-bar-fill').forEach(el=>el.style.width=el.dataset.w+'%'); },60);
+
+  // Streaks & stats
+  let st=computeStreaks();
+  document.getElementById('stat-streak').textContent=st.current;
+  document.getElementById('stat-best').textContent=st.best;
+  document.getElementById('stat-projects').textContent=STATE.projects.length;
+}
+
+function toggleGithubPush(){
+  let wk=getISOWeekKey(new Date());
+  STATE.githubPushWeeks[wk]=document.getElementById('github-push-check').checked;
+  save(); renderDashboard(); toast(STATE.githubPushWeeks[wk]?'GitHub push logged! 🔥':'Push removed');
+}
+
+/* ============================================================ CALENDAR ============================================================ */
+let calYear=2026,calMonth=5,openDayKey='',selectedStatus='';
+
+function renderCalendar(){
+  document.getElementById('cal-title').textContent=MONTH_NAMES[calMonth]+' '+calYear;
+  let ym=calYear+'-'+String(calMonth+1).padStart(2,'0');
+  let phLabel=''; for(let p of PHASES){ if(ym>=p.start.slice(0,7)&&ym<=p.end.slice(0,7)){ phLabel=p.icon+' '+p.title+' — '+p.sub; break; } }
+  document.getElementById('cal-phase-label').textContent=phLabel||'Journey Period';
+
+  let laptopInput=document.getElementById('laptop-date-input');
+  if(STATE.laptopDate) laptopInput.value=STATE.laptopDate;
+
+  let firstDay=new Date(calYear,calMonth,1).getDay();
+  let daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  let today=todayKey();
+  let mDates=new Set(getMilestones().map(m=>m.date));
+  let cal=STATE.calendar;
+  let grid=document.getElementById('cal-grid');
+  grid.innerHTML='';
+  let g=0,y=0,r=0,gr=0;
+
+  for(let i=0;i<firstDay;i++){ let e=document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+
+  for(let d=1;d<=daysInMonth;d++){
+    let dk=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    let dd=cal[dk]; let isFuture=dk>today; let isToday=dk===today;
+    let div=document.createElement('div');
+    div.className='cal-day'+(isFuture?' future':'')+(isToday?' today':'')+(mDates.has(dk)&&!dd?' milestone':'');
+    let dotClass='';
+    if(dd?.status==='green'){dotClass='dot-green';g++;}
+    else if(dd?.status==='yellow'){dotClass='dot-yellow';y++;}
+    else if(dd?.status==='red'){dotClass='dot-red';r++;}
+    else if(dd?.status==='grey'){dotClass='dot-grey';gr++;}
+    else if(mDates.has(dk)){dotClass='dot-milestone';}
+    div.innerHTML='<span class="dnum">'+d+'</span>'+(dotClass?'<span class="dot '+dotClass+'"></span>':'');
+    if(!isFuture) div.onclick=()=>openDayModal(dk);
+    grid.appendChild(div);
+  }
+  document.getElementById('rep-green').textContent=g;
+  document.getElementById('rep-yellow').textContent=y;
+  document.getElementById('rep-red').textContent=r;
+  document.getElementById('rep-grey').textContent=gr;
+
+  // Milestone list
+  let ml=document.getElementById('milestone-list-cal');
+  let nowKey=todayKey();
+  ml.innerHTML=getMilestones().map(m=>{
+    let passed=m.date<nowKey; let next=!passed&&getMilestones().filter(x=>x.date>=nowKey)[0]?.date===m.date;
+    let days=Math.round((parseDate(m.date)-parseDate(nowKey))/86400000);
+    return '<div class="milestone-row'+(passed?' passed':'')+(next?' next-up':'')+'"><span>'+m.icon+'</span><span class="mname">'+m.label+'</span><span class="mdate">'+(passed?'✓ Done':days+'d left')+'</span></div>';
+  }).join('');
+}
+
+function calPrev(){
+  if(calMonth===0){calMonth=11;calYear--;}else calMonth--;
+  if(calYear<2026||(calYear===2026&&calMonth<5)){calMonth=5;calYear=2026;}
+  renderCalendar();
+}
+function calNext(){
+  if(calMonth===11){calMonth=0;calYear++;}else calMonth++;
+  if(calYear>2027||(calYear===2027&&calMonth>4)){calMonth=4;calYear=2027;}
+  renderCalendar();
+}
+
+function saveLaptopDate(val){
+  STATE.laptopDate=val||null; save(); renderCalendar(); renderDashboard(); toast('Laptop date saved! 💻');
+}
+
+function openDayModal(dk){
+  openDayKey=dk; selectedStatus='';
+  let dd=STATE.calendar[dk]||{};
+  let d=parseDate(dk);
+  document.getElementById('day-modal-title').textContent=MONTH_NAMES[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+  document.getElementById('day-note').value=dd.note||'';
+  document.querySelectorAll('.status-opt').forEach(o=>{
+    o.classList.toggle('selected',o.dataset.status===dd.status);
+    if(o.dataset.status===dd.status) selectedStatus=dd.status;
+  });
+  document.getElementById('day-modal').classList.add('show');
+}
+function closeDayModal(){ document.getElementById('day-modal').classList.remove('show'); }
+function selectDayStatus(s){
+  selectedStatus=s;
+  document.querySelectorAll('.status-opt').forEach(o=>o.classList.toggle('selected',o.dataset.status===s));
+}
+function saveDayStatus(){
+  if(!selectedStatus){ toast('Select a status first!'); return; }
+  STATE.calendar[openDayKey]={status:selectedStatus,note:document.getElementById('day-note').value};
+  save(); computeStreaks(); closeDayModal(); renderCalendar(); renderDashboard(); toast('Day saved! 🔥');
+}
+function clearDayStatus(){
+  delete STATE.calendar[openDayKey]; save(); computeStreaks(); closeDayModal(); renderCalendar(); renderDashboard(); toast('Day cleared');
+}
+
+/* ============================================================ PHASES ============================================================ */
+let openPhases={};
+
+function renderPhases(){
+  let {total,done}=countAllTasks(); let pct=total?Math.round(done/total*100):0;
+  document.getElementById('phases-overall-pct').textContent=pct+'%';
+  document.getElementById('phases-overall-bar').style.width=pct+'%';
+
+  let html='';
+  PHASES.forEach((p,i)=>{
+    let c=getPhaseCompletion(p);
+    let items=getPhaseItems(p);
+    html+='<div class="phase-card'+(openPhases[p.id]?' open':'')+'" id="pc-'+p.id+'">';
+    html+='<div class="phase-head" onclick="togglePhase(\''+p.id+'\')"><div class="phase-num">'+p.icon+'</div><div class="phase-head-info"><div class="pt">'+p.title+' — '+p.sub+'</div><div class="pm">'+p.months+'</div></div><div class="phase-pct-wrap"><div class="pp">'+c.pct+'%</div><div class="mini-bar"><div class="mini-bar-fill" style="width:'+c.pct+'%"></div></div></div><div class="chev">▼</div></div>';
+    if(openPhases[p.id]){
+      html+='<div class="phase-body">';
+      html+='<div class="phase-sec-label">📚 Learn</div>';
+      p.learn.forEach((t,j)=>{ let k=ckKey(p.id,items,j); html+='<div class="check-item"><input type="checkbox" id="'+k+'"'+(STATE.checklist[k]?' checked':'')+' onchange="toggleCheck(\''+k+'\')"><label for="'+k+'">'+t+'</label></div>'; });
+      html+='<div class="phase-sec-label">🔨 Build</div>';
+      p.build.forEach((t,j)=>{ let idx=p.learn.length+j; let k=ckKey(p.id,items,idx); html+='<div class="check-item"><input type="checkbox" id="'+k+'"'+(STATE.checklist[k]?' checked':'')+' onchange="toggleCheck(\''+k+'\')"><label for="'+k+'">'+t+'</label></div>'; });
+      html+='<div class="phase-sec-label">✅ Output</div>';
+      p.output.forEach((t,j)=>{ let idx=p.learn.length+p.build.length+j; let k=ckKey(p.id,items,idx); html+='<div class="check-item"><input type="checkbox" id="'+k+'"'+(STATE.checklist[k]?' checked':'')+' onchange="toggleCheck(\''+k+'\')"><label for="'+k+'">'+t+'</label></div>'; });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('phases-container').innerHTML=html;
+
+  // DSA
+  let dsaHtml='';
+  DSA_TOPICS.forEach(t=>{
+    dsaHtml+='<div class="dsa-row"><span style="text-transform:capitalize;font-weight:600;">'+t+'</span><div class="dsa-counter"><button onclick="dsaChange(\''+t+'\',-1)">−</button><span class="cnum" id="dsa-'+t+'">'+(STATE.dsaCount[t]||0)+'</span><button onclick="dsaChange(\''+t+'\',1)">+</button></div></div>';
+  });
+  let total2=DSA_TOPICS.reduce((a,t)=>a+(STATE.dsaCount[t]||0),0);
+  dsaHtml+='<div class="dsa-target">'+total2+' / 100–150 easy problems solved</div>';
+  document.getElementById('dsa-box').innerHTML=dsaHtml;
+}
+
+function togglePhase(id){
+  openPhases[id]=!openPhases[id];
+  renderPhases();
+}
+
+function toggleCheck(key){
+  STATE.checklist[key]=!STATE.checklist[key];
+  save(); renderPhases(); renderDashboard();
+}
+
+function dsaChange(topic,delta){
+  STATE.dsaCount[topic]=Math.max(0,(STATE.dsaCount[topic]||0)+delta);
+  save(); renderPhases(); renderDashboard(); toast(topic+': '+STATE.dsaCount[topic]);
+}
+
+/* ============================================================ PROJECTS ============================================================ */
+function addProject(){
+  let name=document.getElementById('proj-name').value.trim();
+  if(!name){ toast('Project name required!'); return; }
+  STATE.projects.unshift({
+    id:Date.now(),name,
+    desc:document.getElementById('proj-desc').value.trim(),
+    tech:document.getElementById('proj-tech').value.trim(),
+    github:document.getElementById('proj-github').value.trim(),
+    live:document.getElementById('proj-live').value.trim(),
+    phase:document.getElementById('proj-phase').value.trim(),
+    date:document.getElementById('proj-date').value
+  });
+  save();
+  ['proj-name','proj-desc','proj-tech','proj-github','proj-live','proj-phase','proj-date'].forEach(id=>document.getElementById(id).value='');
+  renderProjects(); renderDashboard(); toast('Project added! 🎉');
+}
+
+function deleteProject(id){
+  STATE.projects=STATE.projects.filter(p=>p.id!==id);
+  save(); renderProjects(); renderDashboard(); toast('Project removed');
+}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function renderProjects(){
+  document.getElementById('proj-total').textContent=STATE.projects.length;
+  let list=document.getElementById('projects-list');
+  if(!STATE.projects.length){ list.innerHTML='<div class="empty-state"><span class="em">🚀</span>No projects yet.<br>Build something and add it here!</div>'; return; }
+  list.innerHTML=STATE.projects.map(p=>{
+    let tags=p.tech?p.tech.split(',').map(t=>'<span class="ptag">'+esc(t.trim())+'</span>').join(''):'';
+    let links='';
+    if(p.github) links+='<a href="'+esc(p.github)+'" target="_blank">🐙 GitHub</a>';
+    if(p.live) links+='<a href="'+esc(p.live)+'" target="_blank">🔗 Live</a>';
+    let dateStr=p.date?new Date(p.date+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    return '<div class="proj-card"><button class="proj-del" onclick="deleteProject('+p.id+')">✕</button><div class="ptitle">'+esc(p.name)+'</div>'+(p.desc?'<div class="pdesc">'+esc(p.desc)+'</div>':'')+'<div class="ptech">'+tags+'</div><div class="proj-links">'+links+'</div>'+(dateStr?'<div class="proj-date">Completed: '+dateStr+'</div>':'')+'</div>';
+  }).join('');
+}
+
+/* ============================================================ GOALS ============================================================ */
+function switchGoalSection(name){
+  ['weekly','monthly','rules'].forEach(s=>{
+    document.getElementById('goals-'+s+'-section').style.display=s===name?'block':'none';
+    document.getElementById('goal-tab-'+s).classList.toggle('active',s===name);
+  });
+  if(name==='monthly') populateReflectMonths();
+}
+
+function getWeekKey(){
+  let now=new Date();
+  let d=new Date(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()));
+  let day=d.getUTCDay()||7; d.setUTCDate(d.getUTCDate()+4-day);
+  let ys=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return now.getFullYear()+'-W'+Math.ceil((((d-ys)/86400000)+1)/7);
+}
+
+function addWeeklyGoal(){
+  let input=document.getElementById('new-goal-input');
+  let text=input.value.trim(); if(!text) return;
+  let wk=getWeekKey();
+  if(!STATE.goalWeeks.length||STATE.goalWeeks[0].weekKey!==wk){
+    STATE.goalWeeks.unshift({id:Date.now(),weekKey:wk,weekLabel:getWeekRangeLabel(new Date()),goals:[]});
+  }
+  STATE.goalWeeks[0].goals.push({id:Date.now(),text,done:false});
+  input.value=''; save(); renderGoals(); toast('Goal added!');
+}
+
+function toggleGoalDone(weekId,gi){
+  let w=STATE.goalWeeks.find(x=>x.id===weekId);
+  if(w){ w.goals[gi].done=!w.goals[gi].done; save(); renderGoals(); }
+}
+
+function deleteGoal(weekId,gi){
+  let w=STATE.goalWeeks.find(x=>x.id===weekId);
+  if(w){ w.goals.splice(gi,1); save(); renderGoals(); }
+}
+
+function renderGoals(){
+  let wk=getWeekKey();
+  let cur=STATE.goalWeeks.find(w=>w.weekKey===wk);
+  let list=document.getElementById('weekly-goals-list');
+  if(!cur||!cur.goals.length){
+    list.innerHTML='<div style="text-align:center;padding:16px;color:var(--muted);font-size:12px;">No goals yet this week. Add your first goal above!</div>';
+  } else {
+    list.innerHTML=cur.goals.map((g,gi)=>`<div class="goal-item"><input type="checkbox" ${g.done?'checked':''} onchange="toggleGoalDone(${cur.id},${gi})"><label class="${g.done?'done':''}" onclick="toggleGoalDone(${cur.id},${gi})">${esc(g.text)}</label><button onclick="deleteGoal(${cur.id},${gi})" style="background:none;border:none;color:var(--grey);cursor:pointer;font-size:13px;">✕</button></div>`).join('');
+  }
+
+  let past=document.getElementById('past-weeks-list');
+  let pastWeeks=STATE.goalWeeks.filter(w=>w.weekKey!==wk).slice(0,5);
+  if(!pastWeeks.length){ past.innerHTML='<div style="font-size:12px;color:var(--muted);">No past weeks yet</div>'; }
+  else{ past.innerHTML=pastWeeks.map(w=>'<div class="goal-week-card"><div class="gw-head"><span class="gwt">'+w.weekLabel+'</span></div>'+w.goals.map(g=>'<div class="goal-item"><input type="checkbox" '+(g.done?'checked':'')+' disabled><label class="'+(g.done?'done':'')+'">'+(g.text)+'</label></div>').join('')+'</div>').join(''); }
+
+  renderReflections();
+}
+
+function populateReflectMonths(){
+  let sel=document.getElementById('reflect-month');
+  let months=[];
+  let d=new Date(2026,5,1);
+  while(d<=new Date(2027,4,30)){ months.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')); d.setMonth(d.getMonth()+1); }
+  let cur=sel.value;
+  sel.innerHTML=months.map(m=>{ let [y,mo]=m.split('-'); return '<option value="'+m+'">'+MONTH_NAMES[parseInt(mo)-1]+' '+y+'</option>'; }).join('');
+  if(cur) sel.value=cur;
+  loadReflectionIntoForm(); sel.onchange=loadReflectionIntoForm;
+}
+
+function loadReflectionIntoForm(){
+  let m=document.getElementById('reflect-month').value;
+  let r=STATE.reflections[m]||{q1:'',q2:'',q3:''};
+  document.getElementById('reflect-q1').value=r.q1;
+  document.getElementById('reflect-q2').value=r.q2;
+  document.getElementById('reflect-q3').value=r.q3;
+}
+
+function saveReflection(){
+  let m=document.getElementById('reflect-month').value;
+  if(!m){ toast('Select a month first!'); return; }
+  STATE.reflections[m]={q1:document.getElementById('reflect-q1').value.trim(),q2:document.getElementById('reflect-q2').value.trim(),q3:document.getElementById('reflect-q3').value.trim()};
+  save(); renderReflections(); toast('Reflection saved! 📝');
+}
+
+function renderReflections(){
+  let list=document.getElementById('reflections-list');
+  let entries=Object.entries(STATE.reflections).filter(([,r])=>r.q1||r.q2||r.q3).sort((a,b)=>b[0].localeCompare(a[0]));
+  if(!entries.length){ list.innerHTML='<div style="font-size:12px;color:var(--muted);">No reflections yet.</div>'; return; }
+  list.innerHTML=entries.map(([m,r])=>{
+    let [y,mo]=m.split('-');
+    return '<div class="reflect-card"><div class="rmonth">'+MONTH_NAMES[parseInt(mo)-1]+' '+y+'</div>'+(r.q1?'<div class="reflect-q">What I learned</div><div class="reflect-a">'+esc(r.q1)+'</div>':'')+(r.q2?'<div class="reflect-q">What went wrong</div><div class="reflect-a">'+esc(r.q2)+'</div>':'')+(r.q3?'<div class="reflect-q">Next month goal</div><div class="reflect-a">'+esc(r.q3)+'</div>':'')+'</div>';
+  }).join('');
+}
+
+/* ============================================================ TOAST ============================================================ */
+function toast(msg){ let t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
+
+/* ============================================================ INIT ============================================================ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderDashboard();
+  renderCalendar();
+  renderPhases();
+  renderProjects();
+  renderGoals();
+});
+
+/* ============================================================ PWA SERVICE WORKER ============================================================ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
